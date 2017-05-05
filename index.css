@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, Helvetica, Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #eeeeee;
+    padding: 15%;
+}
+
+input, .answer {
+    font: inherit;
+    padding: 2px;
+    padding-bottom: 8px;
+    padding-top: 16px;
+    border: none;
+    border-bottom: 1px solid #4c42aa;
+    transition: border-bottom-color 250ms ease;
+    outline: none;
+    width: 120px;
+    text-align: center;
+}
+
+.answer {
+    word-break: break-all;
+    display: inline-block;
+}
+
+.answer.incorrect {
+    border-bottom-color: #f44336;
+    color: #d32f2f;
+}
+
+.answer.correct {
+    border-bottom-color: #009688;
+    color: #00796b;
+}
+
+button.correct {
+    background-color: #00796b;
+}
+
+button.incorrect {
+    background-color: #d32f2f;
+}
+
+input:focus {
+    border-bottom-color: #b465da;
+}
+
+.container {
+    background-color: white;
+    max-width: 750px;
+    margin: auto;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.progress {
+    width: 100%;
+}
+
+.progress__bar {
+    width: 100%;
+    height: 3px;
+    transform-origin: left;
+    transform: scaleX(0);
+    will-change: transform;
+    transition: transform 300ms ease;
+    background-image: linear-gradient(to right, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+}
+
+.tags {
+    padding: 32px;
+    padding-bottom: 16px;
+}
+
+.tag {
+    color: #999999;
+    margin-right: 16px;
+    font-style: italic;
+}
+
+.question {
+    padding: 32px;
+    padding-top: 0;
+}
+
+.question span {
+    padding: 1px;
+    padding-bottom: 8px;
+    padding-top: 16px;
+    display: inline-block;
+}
+
+button {
+    font: inherit;
+    padding: 16px;
+    width: 100%;
+    border: none;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background-color: #5d53c1;
+    color: white;
+    transition: background-color 300ms ease;
+}
