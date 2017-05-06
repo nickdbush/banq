@@ -1,4 +1,4 @@
-const commonWords = ['the', 'and', 'are', 'but', 'him', 'her', 'she', 'they', 'them', 'had'];
+const commonWords = ['the', 'and', 'are', 'but', 'him', 'her', 'she', 'you', 'they', 'them', 'had'];
 
 const isTruthy = x => x;
 const reject = predicate => x => !predicate(x);
@@ -8,8 +8,14 @@ const isTokenCommon = x => x.word.length < 3 || commonWords.find(word => sanitiz
 const sanitize = x => x.replace(/(\W)/g, "").trim().toLowerCase();
 const random = () => Math.random() > 0.5;
 
-const pick = target => {
-
+function shuffle(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
 }
 const tokenizeSegment = (x, i) => {
     let tokenType = 'WORD';

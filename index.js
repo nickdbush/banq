@@ -45,18 +45,6 @@ function createTagEl(value) {
     return span;
 }
 
-function renderQuote(quote) {
-    let possibleGaps = quote.tokens
-        .filter(isTokenOfType('WORD'))
-        .filter(reject(isTokenCommon));
-    let gaps = possibleGaps
-        .sort(random)
-        .slice(0, (possibleGaps.length / 3) * 2);  
-        
-    let quoteEl = createQuoteEl(quote.tokens, gaps);
-    document.getElementById('js-question').appendChild(quoteEl);
-}
-
 class State {
     constructor(quotes, questionEl, tagsEl) {
         this.questionEl = document.getElementById('js-question');
@@ -123,7 +111,8 @@ class State {
 
         this.questionEl.innerHTML = '';
         this.questionEl.appendChild(createQuoteEl(this.currentQuote.tokens, this.gaps));
-        this.questionEl.querySelector('input').focus();
+        let firstInput = this.questionEl.querySelector('input');
+        if(firstInput) firstInput.focus()
 
         this.tagsEl.innerHTML = '';
         this.currentQuote.tags.map(createTagEl).forEach(tag => this.tagsEl.appendChild(tag));
@@ -141,11 +130,13 @@ class State {
     }
 
     setCurrent(value) {
-        this.gaps = this.quotes[value].tokens
+        let possibleGaps = this.quotes[value].tokens
             .filter(isTokenOfType('WORD'))
-            .filter(reject(isTokenCommon))
-            .filter(random)
-            .map(x => x.index);
+            .filter(reject(isTokenCommon));
+        this.gaps = shuffle(possibleGaps)
+            .slice(0, Math.max(Math.min((possibleGaps.length / 4) * 3), 2))
+            .map(x => x.index)
+            .sort((a, b) => a > b);
             
         this.current = value;
         this.correct = value;
@@ -162,6 +153,6 @@ state.render();
 
 window.onkeypress = e => {
     if(e.key === 'Enter') {
-        state.checkClicked();
+        state.buttonEl.click();
     }
 }
