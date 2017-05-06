@@ -136,7 +136,7 @@ class State {
         this.gaps = shuffle(possibleGaps)
             .slice(0, Math.max(Math.min((possibleGaps.length / 4) * 3), 2))
             .map(x => x.index)
-            .sort((a, b) => a > b);
+            .sort((a, b) => a - b);
             
         this.current = value;
         this.correct = value;
